@@ -2,7 +2,7 @@ import * as a from '../actions/types'
 
 export default function logout() {
   return async dispatch => {
-    localStorage.removeItem('userToken');
+    localStorage.removeItem('user');
     dispatch({ type: a.LOGOUT })
   }
 }

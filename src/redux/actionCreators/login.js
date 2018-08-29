@@ -24,13 +24,12 @@ export default function login(email, password) {
       const result = await response.json();
 
       if (response.status === 200) {
-        localStorage.setItem('userToken', JSON.stringify(result));
+        localStorage.setItem('user', JSON.stringify(result));
         dispatch({
           type: a.LOGIN_SUCCESS,
         })
       } else throw Error(response.error);
     } catch (err) {
-      console.log(err.message)
       // Update error in reducer on failure
       dispatch({
         type: a.LOGIN_FAILURE,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import login from "../../redux/actionCreators/login";
 import LoginForm from '../../components/loginform'
@@ -7,9 +8,10 @@ import LoginForm from '../../components/loginform'
 class LoginContainer extends Component {
   render() {
     return (
-      <div className='d-flex justify-content-center'>
-        <LoginForm mySubmit={this.loginAction} className='align-self-center'/>
-      </div>
+      this.props.isLoggedIn ? <Redirect to='/parking' /> :
+        <div className='d-flex justify-content-center full-height'>
+          <LoginForm mySubmit={this.loginAction} />
+        </div>
     )
   }
 
