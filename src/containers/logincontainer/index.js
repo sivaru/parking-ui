@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import login from "../../redux/actionCreators/login";
+import {login} from "../../redux/actionCreators/login";
 import LoginForm from '../../components/loginform'
 
 class LoginContainer extends Component {
   render() {
     return (
-      this.props.isLoggedIn ? <Redirect to='/parking' /> :
+      this.props.isLoggedIn ? <Redirect to='/users' /> :
         <div className='d-flex justify-content-center full-height'>
           <LoginForm mySubmit={this.loginAction} />
         </div>

@@ -3,7 +3,7 @@ import * as a from '../actions/types'
 const API_URL = 'http://localhost:3000/login';
 
 
-export default function login(email, password) {
+export function login(email, password) {
   return async dispatch => {
     // Initiate loading state
     dispatch({
@@ -37,4 +37,14 @@ export default function login(email, password) {
       })
     }
   }
+}
+
+
+export function checkLoggedIn() {
+ return dispatch => {
+  const token = localStorage.getItem('user');
+  if(token){
+    dispatch({type: a.LOGIN_SUCCESS});
+  }
+ }
 }
