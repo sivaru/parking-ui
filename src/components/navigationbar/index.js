@@ -5,8 +5,7 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  Container } from 'reactstrap';
+  NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 
@@ -26,7 +25,6 @@ export default class NavigationBar extends React.Component {
   }
   render() {
     return (
-      <Container fluid>
         <Navbar color='dark' dark expand='md'>
           <NavbarBrand className='navigation__brand'>
             <div className='navigation__logo' />
@@ -43,7 +41,6 @@ export default class NavigationBar extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-      </Container>
     );
   }
 }

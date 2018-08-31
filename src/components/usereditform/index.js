@@ -2,6 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
+
+import { Link } from 'react-router-dom'
 
 import './usereditform.scss'
 
@@ -59,12 +62,14 @@ const UserEditForm = props => {
       </div>
 
       <div className='d-flex justify-content-between'>
-        <button type="submit" className='btn btn-warning' disabled={pristine || submitting}>
+        <Button outline type="submit" color='warning' disabled={pristine || submitting}>
           Edit
-        </button>
-        <button className='btn btn-secondary'>
-          Cancel
-        </button>
+        </Button>
+        <Link to='/users'>
+          <Button outline color='secondary'>
+            Cancel
+          </Button>
+        </Link>
       </div>
     </form>
   )

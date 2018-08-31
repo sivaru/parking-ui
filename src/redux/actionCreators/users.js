@@ -54,9 +54,7 @@ export function updateUser(userId, values) {
         },
         body: JSON.stringify(values)
       });
-      console.log('status'+response.status)
       const result = await response.json();
-      console.log(result)
       if (response.status === 200)
         dispatch({
           type: a.USERS_UPDATE_ONE_SUCCESS,

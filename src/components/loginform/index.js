@@ -9,6 +9,7 @@ const LoginForm = props => {
 
   return (
     <form onSubmit={handleSubmit(mySubmit)} className='login-form align-self-center'>
+    <div className="login-form__logo" />
       <div className="form-group">
         <label>Email</label>
         <div>

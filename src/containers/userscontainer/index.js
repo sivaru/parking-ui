@@ -15,13 +15,18 @@ export class index extends Component {
       this.props.isLoading ?
         <Loading /> :
         <Container className='users-container'>
-          <Row>
-            <Col md='3'>Id</Col>
-            <Col md='3'>Name</Col>
-            <Col md='3'>User Type</Col>
-            <Col md='3'>Actions</Col>
-          </Row>
-          {this.props.elements.map(this.generateUserRow)}
+          <div className="d-flex justify-content-center">
+            <h2 className='users-container__heading'>Users list:</h2>
+          </div>
+          <Container className='users-container__users-list'>
+            <Row className='users-container__users-list__heading'>
+              <Col xs='12' md='3'>Id</Col>
+              <Col xs='4' md='3'>Name</Col>
+              <Col xs='4' md='3'>User Type</Col>
+              <Col xs='4' md='3'>Actions</Col>
+            </Row>
+            {this.props.elements.map(this.generateUserRow)}
+          </Container>
         </Container>
     )
   }

@@ -3,9 +3,7 @@ import UsersContainer from '../../containers/userscontainer'
 
 const UsersPage = () => {
   return (
-    <div>
       <UsersContainer />
-    </div>
   )
 };
 

@@ -1,14 +1,9 @@
 $transparent-white: #f2eeee69;
 
 body{
-  overflow-x: hidden;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("./background.jpg");
-  min-width: 100vw;
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #3871D9;
 }
 
 .full-height{
-  height: 100vh;
+  height: 80vh;
 }

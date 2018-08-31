@@ -2,7 +2,8 @@ import * as a from '../../actions/types';
 
 const initialState = {
   isLoading: false,
-  elements: []
+  elements: [],
+  parking: {}
 }
 
 function parkingSpacesReducer(state = initialState, action) {
@@ -27,14 +28,14 @@ function parkingSpacesReducer(state = initialState, action) {
         isLoading: false
       }
 
-    case a.PARKING_SPACES_ASSIGN_ALL_REQUEST:
+    case a.PARKING_SPACES_ASSIGN_REQUEST:
       return {
         ...state,
         isLoading: true
       }
 
     case a.PARKING_SPACES_ASSIGN_SUCCESS:
-     
+
       return {
         ...state,
         isLoading: false,
@@ -47,6 +48,62 @@ function parkingSpacesReducer(state = initialState, action) {
         isLoading: false
       }
 
+    case a.PARKING_SPACES_CREATE_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      }
+
+    case a.PARKING_SPACES_CREATE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        elements: state.elements.concat([action.payload])
+      }
+
+    case a.PARKING_SPACES_CREATE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+
+    case a.PARKING_SPACES_DELETE_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      }
+
+    case a.PARKING_SPACES_DELETE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        elements: state.elements.filter(p => p._id !== action.payload)
+      }
+
+    case a.PARKING_SPACES_DELETE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+
+    case a.PARKING_SPACES_GET_ONE_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      }
+
+    case a.PARKING_SPACES_GET_ONE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        parking: action.payload
+      }
+
+      case a.PARKING_SPACES_GET_ONE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default:
       return state
   }

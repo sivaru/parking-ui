@@ -4,10 +4,10 @@ import { Provider } from 'react-redux'
 import polyfill from "babel-polyfill";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserMinus, faUserEdit } from '@fortawesome/free-solid-svg-icons'
+import { faUserMinus, faUserEdit, faPlus, faMinusSquare, faPenSquare } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 
-library.add(faUserMinus, faUserEdit);
+library.add(faUserMinus, faUserEdit, faPlus, faMinusSquare, faPenSquare);
 
 
 
@@ -19,6 +19,7 @@ import SignUpPage from './pages/signuppage'
 import ParkingPage from './pages/parkingpage';
 import UsersPage from './pages/userspage'
 import UserEditPage from './pages/usereditpage'
+import AddEditParkingPage from './pages/addeditparkingpage';
 
 import NavigationBar from './components/navigationbar/'
 import authenticationWrapper from './components/authenticationWrapper'
@@ -34,10 +35,12 @@ class App extends Component {
             <NavigationBar />
             <Switch>
               <Route exact path='/' component={LoginPage} />
-              <Route path='/parking' component={ParkingPage} />
+              <Route exact path='/parking' component={ParkingPage} />
               <Route exact path='/users' component={UsersPage} />
               <Route path='/users/:id' component={UserEditPage}/>
               <Route path='/signup' component={SignUpPage} />
+              <Route path='/parking/:id' component={AddEditParkingPage}/>
+              <Route path='/parkingcreate' component={AddEditParkingPage}/>
             </Switch>
           </React.Fragment>
         </BrowserRouter>

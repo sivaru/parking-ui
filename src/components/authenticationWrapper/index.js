@@ -9,7 +9,6 @@ import { checkLoggedIn } from '../../redux/actionCreators/login'
 function authenticationWrapper(BaseComponent) {
   class Authenticate extends Component {
     render() {
-      console.log(`Authenticated: ${this.props.isAuthenticated.toString()}`)
       return (
         this.props.isAuthenticated ?
           <BaseComponent {...this.props} /> :
@@ -17,9 +16,8 @@ function authenticationWrapper(BaseComponent) {
       )
     }
 
-   async componentWillMount(){
-      console.log('componentwillmount')
-      await this.props.checkLoggedIn();
+    componentWillMount(){
+       this.props.checkLoggedIn();
     }
   }
 

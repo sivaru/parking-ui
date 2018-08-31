@@ -3,9 +3,9 @@ import SignUpContainer from '../../containers/signupcontainer'
 
 const SignUpPage = () => {
   return (
-    <React.Fragment>
+    <div>
       <SignUpContainer />
-    </React.Fragment>
+    </div>
   )
 };
 
