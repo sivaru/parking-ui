@@ -60,10 +60,13 @@ export function updateUser(userId, values) {
           type: a.USERS_UPDATE_ONE_SUCCESS,
           payload: result.user
         });
-
-      throw new Error();
+      else
+        throw new Error(result.message);
     } catch (error) {
-      dispatch({ type: a.USERS_UPDATE_ONE_FAILURE });
+      dispatch({
+        type: a.USERS_UPDATE_ONE_FAILURE,
+        payload: error.message
+      });
     }
   }
 }

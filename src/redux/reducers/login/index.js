@@ -2,7 +2,9 @@ import * as a from '../../actions/types'
 
 const INITIAL_STATE = {
   isLoggedIn: false,
-  isLoggingIn: false
+  isLoggingIn: false,
+  error: false,
+  user:{}
 }
 
 function loginReducer(state = INITIAL_STATE, action) {
@@ -17,13 +19,16 @@ function loginReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         isLoggingIn: false,
-        isLoggedIn:true
+        isLoggedIn:true,
+        user:action.payload,
+        error:false
       }
 
     case a.LOGIN_FAILURE:
       return {
         ...state,
-        isLoggingIn: false
+        isLoggingIn: false,
+        error:true
       }
 
     case a.LOGOUT:

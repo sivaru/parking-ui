@@ -1,0 +1,18 @@
+.navigation-bar{
+  background-color: #283e4a;
+  &__link{
+    color:#bac5cd;
+  }
+}
+
+.navbar-light .navbar-nav .nav-link{
+  color:#bac5cd;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+  color:#ebedee;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+  color:#ebedee;
+}

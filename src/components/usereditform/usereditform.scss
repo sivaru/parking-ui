@@ -1,5 +1,10 @@
 .user-edit-form{
-  background-color:#f9f9f8;
+  background-color:#ffffff;
   padding: 2%;
   border-radius: 1%;
+  min-width: 50vw;
+
+  &__heading{
+    border-bottom: 1px solid black;
+  }
 }

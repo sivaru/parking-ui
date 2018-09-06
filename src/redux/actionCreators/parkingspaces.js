@@ -2,6 +2,22 @@ import * as a from '../actions/types'
 
 const API_URL = 'http://localhost:3000/parkingSpaces'
 
+export function resetNotifications() {
+  return dispatch => {
+    dispatch({
+      type: a.PARKING_SPACES_RESET_NOTIFICATIONS
+    })
+  }
+}
+
+
+export function resetParking(){
+  return dispatch => {
+    dispatch({
+      type: a.PARKING_SPACES_RESET_PARKING
+    })
+  }
+}
 export function createParkingSpace(values) {
   return async dispatch => {
     dispatch({ type: a.PARKING_SPACES_CREATE_REQUEST });
@@ -14,13 +30,16 @@ export function createParkingSpace(values) {
         },
         body: JSON.stringify(values)
       });
-      const result = response.json();
+      const result = await response.json();
 
       if (response.status === 201)
-        dispatch({ type: a.PARKING_SPACES_CREATE_SUCCESS })
-        else throw new Error();
+        dispatch({
+          type: a.PARKING_SPACES_CREATE_SUCCESS,
+          payload: result.parkingSpace
+        })
+      else throw new Error();
     } catch (error) {
-      dispatch({type: a.PARKING_SPACES_CREATE_FAILURE})
+      dispatch({ type: a.PARKING_SPACES_CREATE_FAILURE })
     }
   }
 }
@@ -65,7 +84,6 @@ export function getParkingSpaceById(id) {
   }
 }
 
-
 export function deleteParkingSpace(parkingID) {
   return async dispatch => {
     dispatch({ type: a.PARKING_SPACES_DELETE_REQUEST });
@@ -81,12 +99,12 @@ export function deleteParkingSpace(parkingID) {
         })
       else throw new Error();
     } catch (error) {
-      dispatch({ type: a.PARKING_SPACES_DELETE_FAILURE})
+      dispatch({ type: a.PARKING_SPACES_DELETE_FAILURE })
     }
   }
 }
 
-export function assignParkingSpace(parkingId, user) {
+export function updateParkingSpace(values, parkingId) {
   return async dispatch => {
     dispatch({ type: a.PARKING_SPACES_ASSIGN_REQUEST });
     try {
@@ -96,16 +114,21 @@ export function assignParkingSpace(parkingId, user) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ isAssigned: true, assignedUser: user })
+        body: JSON.stringify(values)
       });
       const result = await response.json();
-      if (response.status === 200)
+      if (response.status === 200) {
         dispatch({
           type: a.PARKING_SPACES_ASSIGN_SUCCESS,
           payload: result
         });
+      } else throw new Error(result.message);
     } catch (error) {
-      dispatch({ type: a.PARKING_SPACES_ASSIGN_FAILURE });
+      console.log(error.message)
+      dispatch({
+        type: a.PARKING_SPACES_ASSIGN_FAILURE,
+        payload: error.message
+      });
     }
   }
 }

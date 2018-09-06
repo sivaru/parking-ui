@@ -1,12 +1,13 @@
 import React from 'react'
 
 import ParkingContainer from '../../containers/parkingcontainer'
-
- const ParkingPage = () => {
+import NavigationBar from '../../components/navigationbar/'
+const ParkingPage = () => {
   return (
-    <React.Fragment> 
-    <ParkingContainer />
-      </React.Fragment>
+    <React.Fragment>
+      <NavigationBar />
+      <ParkingContainer />
+    </React.Fragment>
   )
 };
 

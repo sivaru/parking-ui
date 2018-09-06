@@ -41,10 +41,14 @@ export function login(email, password) {
 
 
 export function checkLoggedIn() {
- return dispatch => {
-  const token = localStorage.getItem('user');
-  if(token){
-    dispatch({type: a.LOGIN_SUCCESS});
+  return dispatch => {
+    dispatch({type: a.LOGIN_REQUEST})
+    const token = localStorage.getItem('user');
+    if (token) {
+      dispatch({
+        type: a.LOGIN_SUCCESS,
+        payload: JSON.parse(token).cleanUser
+      });
+    }
   }
- }
 }

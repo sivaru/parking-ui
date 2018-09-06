@@ -1,9 +1,33 @@
 $transparent-white: #f2eeee69;
 
 body{
-  background-color: #3871D9;
+  background-color: #f5f5f5;
 }
 
 .full-height{
   height: 80vh;
+}
+
+.shadow{
+  -webkit-box-shadow: 4px 3px 8px 0px rgba(213,213,213,1);
+  -moz-box-shadow: 4px 3px 8px 0px rgba(213,213,213,1);
+  box-shadow: 4px 3px 8px 0px rgba(213,213,213,1);
+}
+
+.border{
+  border: 1px solid #c6c6c6;
+  border-radius: 2px;
+}
+
+.black-bottom-border{
+  border-bottom: 1px solid black;
+}
+
+.white-background{
+  background-color: #ffffff;
+}
+
+.margin-t-b{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

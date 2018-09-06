@@ -7,16 +7,27 @@ import { Container, Row } from 'reactstrap'
 import ParkingSpaceBox from '../../components/parkingspacebox'
 import AddParkingSpaceBox from '../../components/addparkingspacebox'
 import Loading from '../../components/loading'
-import { getParkingSpaces, assignParkingSpace, deleteParkingSpace } from '../../redux/actionCreators/parkingspaces'
+import { ToastContainer, toast } from 'react-toastify';
+
+import { getParkingSpaces, updateParkingSpace, deleteParkingSpace } from '../../redux/actionCreators/parkingspaces'
 
 import './parkingcontainer.scss'
 
 export class ParkingContainer extends Component {
+  notify = (success) => toast(
+    success ?
+      `The parking space was succesfully ${this.props.parkingId !== 'create' ? 'updated' : 'created'}`
+      : this.props.errorMessage, { type: success ? toast.TYPE.SUCCESS : toast.TYPE.ERROR });
   render() {
+    if (!this.props.isLoading) {
+      this.props.succesNotification ? this.notify(true) : '';
+      this.props.errorNotification ? this.notify(false) : '';
+    }
+
     return (
 
       <Container className='parking-container'>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center margin-t-b">
           <h2>Konrad Group's parking spaces:</h2>
         </div>
         <Row>
@@ -25,8 +36,10 @@ export class ParkingContainer extends Component {
               <Loading /> :
               this.props.parkingSpaces.map(this.generateParkingSpaceBox)
           }
-          <AddParkingSpaceBox/>
+         {this.props.admin ? <AddParkingSpaceBox/> : ''}
         </Row>
+        <ToastContainer />
+
       </Container>
     )
   }
@@ -35,7 +48,7 @@ export class ParkingContainer extends Component {
     this.props.getParkingSpaces();
   }
 
-  generateParkingSpaceBox = (e) => <ParkingSpaceBox key={e._id} parkingSpace={e} handleAssign={this.props.assignParkingSpace} handleDelete={this.props.deleteParkingSpace}/>
+  generateParkingSpaceBox = (e) => <ParkingSpaceBox key={e._id} admin={this.props.admin} user={this.props.user} parkingSpace={e} handleAssign={this.props.updateParkingSpace} handleDelete={this.props.deleteParkingSpace}/>
 
 
 
@@ -43,12 +56,17 @@ export class ParkingContainer extends Component {
 
 const mapStateToProps = (state) => ({
   parkingSpaces: state.parkingSpaces.elements,
-  isLoading: state.parkingSpaces.isLoading
+  isLoading: state.parkingSpaces.isLoading,
+  admin: state.login.user.admin,
+  succesNotification: state.parkingSpaces.successNotification,
+  errorNotification: state.parkingSpaces.errorNotification,
+  errorMessage: state.parkingSpaces.errorMessage,
+  user: state.login.user
 })
 
 const mapDispatchToProps = {
   getParkingSpaces,
-  assignParkingSpace,
+  updateParkingSpace,
   deleteParkingSpace
 }
 

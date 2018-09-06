@@ -1,48 +1,75 @@
 import React from 'react'
-import { Col, Card, CardHeader, CardBody, CardTitle, CardText, Button } from 'reactstrap'
+import { Col, Card, CardHeader, CardBody, CardTitle, CardText, Button, CardFooter } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
 
 import ModalConfirmation from '../modalconfirmation'
 import './parkingspacebox.scss'
 
-const ParkingSpaceBox = ({ parkingSpace, handleAssign, handleDelete }) => {
+const ParkingSpaceBox = ({ parkingSpace, handleAssign, handleDelete, admin, user }) => {
 
-  const assignParkingToCurrentUser = () => { handleAssign(parkingSpace._id, JSON.parse(localStorage.getItem('user')).cleanUser.id); }
+  const assignParkingToCurrentUser = () => { handleAssign({ isAssigned: true, assignedUser: JSON.parse(localStorage.getItem('user')).cleanUser.id }, parkingSpace._id); }
+  const unassignParkingToCurrentUser = () => { handleAssign({ isAssigned: false }, parkingSpace._id); }
   const deleteThisParkingSpace = () => { handleDelete(parkingSpace._id) }
-  return (
-    <Col md='2' >
+  const assignedToCurrentUser = () => parkingSpace.assignedUser._id === user.id
 
-      <Card>
-        <CardHeader className={parkingSpace.isAssigned ? 'bg-danger' : 'bg-success'}>
-          <div className="d-flex justify-content-between">
-            <CardTitle> {parkingSpace.section} {parkingSpace.number}</CardTitle>
-            <div>
-              <ModalConfirmation
-                buttonLabel='minus-square'
-                title="Parking Space Delete"
-                bodyText={`Are you sure you want to delete the ${parkingSpace.section} ${parkingSpace.number} parking?`}
-                confirmationText="Delete"
-                confirmationColor="danger"
-                buttonColor="light"
-                action={deleteThisParkingSpace} />
-              <Link to={`parking/${parkingSpace._id}`}>
-                <Button outline color="warning" ><FontAwesomeIcon icon="pen-square" /></Button>
-              </Link>
-            </div>
+  return (
+    <Col md='3' >
+
+      <Card className='parking-space-box shadow'>
+        <CardHeader className={parkingSpace.isAssigned ? parkingSpace.freePeriod ? 'bg-primary' : 'bg-secondary' : 'bg-success'}>
+          <div className="d-flex justify-content-center">
+            <CardTitle>{parkingSpace.section} {parkingSpace.number}</CardTitle>
+
           </div>
         </CardHeader>
-        <CardBody>
-          {parkingSpace.isAssigned ?
-            <CardText>
-              Assigned to: {parkingSpace.assignedUser.firstName} {parkingSpace.assignedUser.lastName}
-            </CardText> :
+        <CardBody className='d-flex justify-content-center'>
+          <div>
+            {parkingSpace.isAssigned ?
+              <React.Fragment>
+                <CardText>
+                  Assigned to: {assignedToCurrentUser() ? 'me' : `${parkingSpace.assignedUser.firstName} ${parkingSpace.assignedUser.lastName}`}
+                </CardText>
+                {parkingSpace.freePeriod ? <CardText>{'Free to use until: ' + parkingSpace.freePeriodEnd.split('T')[0]}</CardText> : ''}
+              </React.Fragment>
+              :
+              <div className="d-flex justify-content-center">
+                <Button color="primary" className='align-self-center' onClick={assignParkingToCurrentUser}>Request</Button>
+              </div>
 
-            <Button outline color="secondary" onClick={assignParkingToCurrentUser}>Reclaim</Button>
-          }
+            }
 
-        </CardBody>
+            {parkingSpace.isAssigned && assignedToCurrentUser() ?
+              <div className='d-flex justify-content-center'>
+                <Button color="danger" onClick={unassignParkingToCurrentUser}>Release Parking</Button> </div> : ''}
+          </div>
 
+        </CardBody >
+        {admin || parkingSpace.isAssigned && assignedToCurrentUser() && !admin ?
+          <CardFooter>
+            {admin ?
+              <div className='d-flex justify-content-around '>
+                <Link to={`parking/${parkingSpace._id}`}>
+                  <Button color="warning" ><FontAwesomeIcon icon="pen-square" /></Button>
+                </Link>
+                <ModalConfirmation
+                  buttonLabel='minus-square'
+                  title="Parking Space Delete"
+                  bodyText={`Are you sure you want to delete the ${parkingSpace.section} ${parkingSpace.number} parking?`}
+                  confirmationText="Delete"
+                  confirmationColor="danger"
+                  buttonColor="danger"
+                  action={deleteThisParkingSpace} />
+              </div> : ''}
+            {
+              parkingSpace.isAssigned && assignedToCurrentUser() && !admin ?
+                <div className="d-flex justify-content-end">
+                  <Link to={`parking/${parkingSpace._id}`}>
+                    <Button color="warning" ><FontAwesomeIcon icon="pen-square" /></Button>
+                  </Link>
+                </div> : ''
+            }
+          </CardFooter> : ''}
       </Card>
 
     </Col>

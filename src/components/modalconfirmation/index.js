@@ -23,7 +23,7 @@ class ModalConfirmation extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Button outline className={this.props.buttonClassName} color={this.props.buttonColor ? this.props.buttonColor : "danger"} onClick={this.toggle}><FontAwesomeIcon icon={this.props.buttonLabel} /></Button>
+        <Button  className={this.props.buttonClassName} color={this.props.buttonColor ? this.props.buttonColor : "danger"} onClick={this.toggle}><FontAwesomeIcon icon={this.props.buttonLabel} /></Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
           <ModalBody>
@@ -31,12 +31,12 @@ class ModalConfirmation extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button
-              outline
+              
               color={this.props.confirmationColor ? this.props.confirmationColor : 'primary'}
               onClick={this.props.action}>
               {this.props.confirmationText}
             </Button>{' '}
-            <Button outline color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button  color="primary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </React.Fragment>

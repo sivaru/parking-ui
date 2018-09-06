@@ -1,10 +1,9 @@
 .user-row{
-  border-bottom: 1px solid #9ebdea;
-  color: #7ba1e5;
+  border-bottom: 1px solid #c6c6c6;
+  color: navy;
   padding: 1%;
-  &__button{
-    margin-left: 1%;
-    margin-right: 1%; 
+  &__button-container{
+    min-width: 112px;
   }
 }
 
