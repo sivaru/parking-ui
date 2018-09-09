@@ -36,7 +36,7 @@ export class ParkingContainer extends Component {
               <Loading /> :
               this.props.parkingSpaces.map(this.generateParkingSpaceBox)
           }
-         {this.props.admin ? <AddParkingSpaceBox/> : ''}
+         {this.props.user.admin ? <AddParkingSpaceBox/> : ''}
         </Row>
         <ToastContainer />
 
@@ -48,7 +48,7 @@ export class ParkingContainer extends Component {
     this.props.getParkingSpaces();
   }
 
-  generateParkingSpaceBox = (e) => <ParkingSpaceBox key={e._id} admin={this.props.admin} user={this.props.user} parkingSpace={e} handleAssign={this.props.updateParkingSpace} handleDelete={this.props.deleteParkingSpace}/>
+  generateParkingSpaceBox = (e) => <ParkingSpaceBox key={e._id} admin={this.props.user.admin} user={this.props.user} parkingSpace={e} handleAssign={this.props.updateParkingSpace} handleDelete={this.props.deleteParkingSpace}/>
 
 
 
@@ -56,8 +56,7 @@ export class ParkingContainer extends Component {
 
 const mapStateToProps = (state) => ({
   parkingSpaces: state.parkingSpaces.elements,
-  isLoading: state.parkingSpaces.isLoading,
-  admin: state.login.user.admin,
+  isLoading: state.parkingSpaces.isLoading || state.login.isLoggingIn,
   succesNotification: state.parkingSpaces.successNotification,
   errorNotification: state.parkingSpaces.errorNotification,
   errorMessage: state.parkingSpaces.errorMessage,

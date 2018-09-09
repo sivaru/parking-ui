@@ -10,12 +10,14 @@ const INITIAL_STATE = {
 function loginReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case a.LOGIN_REQUEST:
+    case a.LOGIN_CHECK_REQUEST:
       return {
         ...state,
         isLoggingIn: true,
       }
 
     case a.LOGIN_SUCCESS:
+    case a.LOGIN_CHECK_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
@@ -30,6 +32,14 @@ function loginReducer(state = INITIAL_STATE, action) {
         isLoggingIn: false,
         error:true
       }
+
+      case a.LOGIN_FAILURE:
+      case a.LOGIN_CHECK_FAILURE:
+        return {
+          ...state,
+          isLoggingIn: false,
+        }
+  
 
     case a.LOGOUT:
     return {

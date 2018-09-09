@@ -1,0 +1,13 @@
+.news-row{
+  border-bottom: 1px solid #c6c6c6;
+  color: navy;
+  padding: 1%;
+  &__button-container{
+    min-width: 112px;
+  }
+}
+
+.news-row:hover{
+  background-color: #9ebdea;
+  color: #f9f9f8;
+}

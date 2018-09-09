@@ -1,0 +1,18 @@
+.news-list-container{
+  padding: 2%;
+  border-radius: 1%;
+
+  &__heading{
+    color:black;
+  }
+
+  &__news-list{
+  background-color: #ffffff;
+
+    &__heading{
+      background-color: #0091be;
+      color: #dde8ec;
+      padding: 1%;
+    }
+  }
+}

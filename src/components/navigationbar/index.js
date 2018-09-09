@@ -34,7 +34,7 @@ class NavigationBar extends React.Component {
     });
   }
   render() {
-    return (
+    return (this.props.isLoading ? '' :
       <Navbar className='navigation-bar' light expand='md'>
         <NavbarBrand className='navigation__brand'>
           <div className='navigation__logo' />
@@ -42,9 +42,15 @@ class NavigationBar extends React.Component {
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className='ml-auto' navbar>
-            {this.props.user.admin ? <NavItem onClick={this.toggle}>
-              <Link className='nav-link navigation-bar__nav-link' to='/users'>Users</Link>
-            </NavItem> : ''}
+            {this.props.user.admin ?
+              <React.Fragment>
+                <NavItem onClick={this.toggle}>
+                  <Link className='nav-link navigation-bar__nav-link' to='/users'>Users</Link>
+                </NavItem>
+                <NavItem onClick={this.toggle}>
+                  <Link className='nav-link navigation-bar__nav-link' to='/news'>News</Link>
+                </NavItem>
+              </React.Fragment> : ''}
             <NavItem onClick={this.toggle}>
               <Link className='nav-link navigation-bar__link' to='/parking'>Parking Spaces</Link>
             </NavItem>
@@ -71,7 +77,8 @@ class NavigationBar extends React.Component {
 
 }
 const mapStatetoProps = (state) => ({
-  user: state.login.user
+  user: state.login.user,
+  isLoading: state.login.isLoggingIn
 })
 
 const mapDispatchToProps = {

@@ -11,7 +11,7 @@ export function resetNotifications() {
 }
 
 
-export function resetParking(){
+export function resetParking() {
   return dispatch => {
     dispatch({
       type: a.PARKING_SPACES_RESET_PARKING
@@ -37,9 +37,12 @@ export function createParkingSpace(values) {
           type: a.PARKING_SPACES_CREATE_SUCCESS,
           payload: result.parkingSpace
         })
-      else throw new Error();
+      else throw new Error(result.message);
     } catch (error) {
-      dispatch({ type: a.PARKING_SPACES_CREATE_FAILURE })
+      dispatch({
+        type: a.PARKING_SPACES_CREATE_FAILURE,
+        payload: error.message
+      })
     }
   }
 }
@@ -124,7 +127,6 @@ export function updateParkingSpace(values, parkingId) {
         });
       } else throw new Error(result.message);
     } catch (error) {
-      console.log(error.message)
       dispatch({
         type: a.PARKING_SPACES_ASSIGN_FAILURE,
         payload: error.message

@@ -7,6 +7,7 @@ import loginReducer from './login';
 import signUpReducer from './signup';
 import parkingSpacesReducer from './parkingspaces'
 import usersReducer from './users'
+import newsReducer from './news'
 
 export default combineReducers({
   router: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   login: loginReducer,
   signup: signUpReducer,
   parkingSpaces: parkingSpacesReducer,
-  users: usersReducer
+  users: usersReducer,
+  news: newsReducer
 })

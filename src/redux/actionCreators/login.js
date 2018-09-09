@@ -42,13 +42,18 @@ export function login(email, password) {
 
 export function checkLoggedIn() {
   return dispatch => {
-    dispatch({type: a.LOGIN_REQUEST})
+    dispatch({type: a.LOGIN_CHECK_REQUEST})
+   try {
     const token = localStorage.getItem('user');
     if (token) {
       dispatch({
-        type: a.LOGIN_SUCCESS,
+        type: a.LOGIN_CHECK_SUCCESS,
         payload: JSON.parse(token).cleanUser
       });
     }
+    else throw new Error()
+   } catch (error) {
+     dispatch({type : a.LOGIN_CHECK_FAILURE})
+   }
   }
 }

@@ -19,8 +19,21 @@ export const maxLength1 = maxLength(1)
 export const minLength1 = minLength(1)
 export const minValue1 = minValue(1)
 export const RenderField = ({ input, label, type, className, meta: { touched, error, warning } }) => (
-  <div>
+ type ==='textarea' ? 
+ <div>
+    <textarea className={className} {...input} placeholder={label} type={type} />
+    {touched && ((error && <div className='error'>
+      <span>
+        <FontAwesomeIcon icon='exclamation-circle' />  {error}</span>
+    </div>) ||
+      (warning && <div className='error'>
+        <span>{warning}</span>
+      </div>))}
 
+  </div>
+ 
+ 
+ : <div>
     <input className={className} {...input} placeholder={label} type={type} />
     {touched && ((error && <div className='error'>
       <span>

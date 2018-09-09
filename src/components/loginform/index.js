@@ -2,6 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 
+import { RenderField, email, required} from '../renderfield'
+
 
 import './loginform.scss'
 
@@ -9,30 +11,34 @@ const LoginForm = props => {
   const { handleSubmit, pristine, submitting, mySubmit } = props;
 
   return (
-    <form onSubmit={handleSubmit(mySubmit)} className='login-form align-self-center'>
-    <div className="login-form__logo" />
+    <form onSubmit={handleSubmit(mySubmit)} className='login-form align-self-center border shadow'>
+      <div className='black-bottom-border margin-t-b'>
+        <h1>Konrad Parking System</h1>
+      </div>
       <div className="form-group">
         <label>Email</label>
         <div>
           <Field
             name="email"
-            component="input"
+            component={RenderField}
             type="email"
             placeholder="Email"
             className="form-control"
+            validate={[required, email]}
           />
         </div>
       </div>
 
-      <div  className="form-group">
+      <div className="form-group">
         <label htmlFor="password">Password</label>
         <div>
           <Field
             name="password"
-            component="input"
+            component={RenderField}
             type="password"
             placeholder="Password"
             className="form-control"
+            validate={[required]}
           />
         </div>
       </div>
@@ -42,7 +48,7 @@ const LoginForm = props => {
           Log in
         </button>
         <Link to='/signup'>
-          <button className="btn">Sign Up</button> 
+          <button className="btn">Sign Up</button>
         </Link>
       </div>
     </form>

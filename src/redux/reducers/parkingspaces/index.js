@@ -13,10 +13,10 @@ function parkingSpacesReducer(state = initialState, action) {
   switch (action.type) {
 
     case a.PARKING_SPACES_RESET_PARKING:
-    return {
-      ...state,
-      parking: {}
-    }
+      return {
+        ...state,
+        parking: {}
+      }
     case a.PARKING_SPACES_GET_ALL_REQUEST:
     case a.PARKING_SPACES_ASSIGN_REQUEST:
     case a.PARKING_SPACES_CREATE_REQUEST:
@@ -84,7 +84,7 @@ function parkingSpacesReducer(state = initialState, action) {
       }
 
     case a.PARKING_SPACES_RESET_NOTIFICATIONS:
-      return{
+      return {
         ...state,
         errorNotification: false,
         successNotification: false
@@ -97,8 +97,10 @@ function parkingSpacesReducer(state = initialState, action) {
 
 
 function normalizeDate(parking) {
-  parking.freePeriodStart = parking.freePeriodStart.split('T')[0];
-  parking.freePeriodEnd = parking.freePeriodEnd.split('T')[0];
+  if (parking.freePeriod) {
+    parking.freePeriodStart = parking.freePeriodStart.split('T')[0];
+    parking.freePeriodEnd = parking.freePeriodEnd.split('T')[0];
+  }
   return parking;
 }
 export default parkingSpacesReducer;

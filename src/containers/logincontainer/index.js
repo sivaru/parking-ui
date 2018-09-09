@@ -13,7 +13,6 @@ class LoginContainer extends Component {
   render() {
     if (!this.props.isLoggingIn) {
       this.props.error ? this.notify(false) : '';
-      console.log('mostrat error')
     }
 
     return (

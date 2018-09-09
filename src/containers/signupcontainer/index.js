@@ -7,7 +7,7 @@ import SignUpForm from '../../components/signupform';
 class SignUpContainer extends Component {
   render() {
     return (
-      <div className='d-flex justify-content-center full-height'>
+      <div className='d-flex justify-content-center'>
         <SignUpForm mySubmit={this.props.signup} />
       </div>
     )

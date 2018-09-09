@@ -9,7 +9,8 @@ const AddParkingSpaceBox = () => {
     <Col md='2' >
       <Link to='/parking/create'>
         <Button color="primary" className='shadow border'style={{
-          minHeight: 42 + 'vh',
+          minHeight: 49 + 'vh',
+          minWidth: 20 + 'vw',
           marginBottom: 16 + 'px',
           width: 100+'%'
         }}>

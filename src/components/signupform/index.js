@@ -1,20 +1,21 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import { RenderField, required } from '../renderfield'
 import './signupform.scss'
 
 const SignUpForm = props => {
   const { handleSubmit, pristine, submitting, mySubmit } = props;
 
   return (
-    <form onSubmit={handleSubmit(mySubmit)} className='align-self-center sign-up-form'>
+    <form onSubmit={handleSubmit(mySubmit)} className='margin-t-b border shadow bg-white sign-up-form'>
     <h3>Sign up now!</h3>
       <div className='form-group'>
         <label>Email.</label>
         <div>
           <Field
             name="email"
-            component="input"
+            component={RenderField}  validate={[required]}
             type="email"
             placeholder="Email"
             className="form-control"
@@ -26,7 +27,7 @@ const SignUpForm = props => {
         <div>
           <Field
             name="firstName"
-            component="input"
+            component={RenderField}  validate={[required]}
             type="text"
             placeholder="First name."
             className="form-control"
@@ -38,7 +39,7 @@ const SignUpForm = props => {
         <div>
           <Field
             name="lastName"
-            component="input"
+            component={RenderField}  validate={[required]}
             type="text"
             placeholder="Last name."
             className="form-control"
@@ -50,7 +51,7 @@ const SignUpForm = props => {
         <div>
           <Field
             name="password"
-            component="input"
+            component={RenderField}  validate={[required]}
             type="password"
             placeholder="**********"
             className="form-control"

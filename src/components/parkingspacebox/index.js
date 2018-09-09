@@ -30,7 +30,7 @@ const ParkingSpaceBox = ({ parkingSpace, handleAssign, handleDelete, admin, user
                 <CardText>
                   Assigned to: {assignedToCurrentUser() ? 'me' : `${parkingSpace.assignedUser.firstName} ${parkingSpace.assignedUser.lastName}`}
                 </CardText>
-                {parkingSpace.freePeriod ? <CardText>{'Free to use until: ' + parkingSpace.freePeriodEnd.split('T')[0]}</CardText> : ''}
+                {parkingSpace.freePeriod ? <CardText>{'Free to use until: ' + new Date(parkingSpace.freePeriodEnd).toLocaleDateString()}</CardText> : ''}
               </React.Fragment>
               :
               <div className="d-flex justify-content-center">
