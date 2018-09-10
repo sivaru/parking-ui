@@ -15,13 +15,15 @@ export default function login(values) {
         },
         body: JSON.stringify(values)
       });
-      const result = response.json();
-
+      const result = await response.json();
       if (response.status === 201)
         dispatch({ type: a.SIGNUP_SUCCESS })
-        else throw new Error();
+      else throw new Error(result.message);
     } catch (error) {
-      dispatch({type: a.SIGNUP_FAILURE})
+      dispatch({
+        type: a.SIGNUP_FAILURE,
+        payload: error.message
+      })
     }
   }
 }

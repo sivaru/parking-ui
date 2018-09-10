@@ -1,5 +1,6 @@
 import * as a from '../actions/types'
 const API_URL = 'http://localhost:3000/news'
+const token = JSON.parse(localStorage.getItem('user')).token;
 
 
 export function resetNotifications() {
@@ -10,13 +11,17 @@ export function resetNotifications() {
   }
 }
 
-export function getNews(){
+export function getNews() {
   return async dispatch => {
     dispatch({
       type: a.NEWS_GET_ALL_REQUEST
     });
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(API_URL, {
+        headers: new Headers({
+          'Authorization': 'Bearer ' + token,
+        })
+      });
       const result = await response.json();
 
       if (response.status === 200)
@@ -31,7 +36,7 @@ export function getNews(){
   }
 }
 
-export function createNew(values){
+export function createNew(values) {
   return async dispatch => {
     dispatch({ type: a.NEWS_CREATE_REQUEST });
     try {
@@ -59,7 +64,7 @@ export function createNew(values){
     }
   }
 }
-export function deleteNew(id){
+export function deleteNew(id) {
   return async dispatch => {
     dispatch({
       type: a.NEWS_DELETE_ONE_REQUEST

@@ -2,7 +2,9 @@ import * as a from '../../actions/types'
 
 const INITIAL_STATE = {
   isLoading: false,
-  error: false
+  error: false,
+  success: false,
+  errorMessage: ''
 }
 
 function signupReducer(state = INITIAL_STATE, action) {
@@ -17,13 +19,16 @@ function signupReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         isLoading: false,
-        error:false
+        error:false,
+        success:true
       }
 
     case a.SIGNUP_FAILURE:
       return {
         ...state,
-        error: true
+        error: true,
+        errorMessage:action.payload,
+        isLoading: false
       }
 
     default:

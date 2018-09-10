@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-
+import { Link } from 'react-router-dom'
 import { RenderField, required } from '../renderfield'
 import './signupform.scss'
 
@@ -59,10 +59,16 @@ const SignUpForm = props => {
         </div>
       </div>
 
-      <div>
+      <div className='d-flex justify-content-between'>
         <button type="submit" className='btn btn-primary' disabled={pristine || submitting}>
           Sign up
         </button>
+
+        <Link to='/login'>
+        <button type="submit" className='btn btn-secondary' >
+          Go to login
+        </button>
+        </Link>
       </div>
     </form>
   )
