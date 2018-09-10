@@ -99,7 +99,7 @@ const UserEditForm = (props) => {
               name="freePeriodStart"
               component="input"
               type="date"
-              min={Date.now()}
+              min={Date.now().toLocaleString()}
               className="form-control"
             />
           </div>
